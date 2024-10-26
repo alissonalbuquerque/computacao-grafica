@@ -41,11 +41,11 @@ local ButtonNextPage = {
         local options =
             {
                 id = 'btn-next-page',
-                overFile = "assets/btn_next_default.png",
-                defaultFile = "assets/btn_next_default.png",
+                overFile = "assets/btn_next.png",
+                defaultFile = "assets/btn_next.png",
 
-                x = Dimension.decrementWidth(Dimension.sliceWidth(7)), -- decrement proportion 1/ from width
-                y = Dimension.decrementHeight(Dimension.sliceHeight(10)), -- decrement proportion 1/10 from height
+                x = Dimension.BTN_NEXT_X,
+                y = Dimension.BTN_NEXT_Y,
                 
                 onRelease = function(event)
 

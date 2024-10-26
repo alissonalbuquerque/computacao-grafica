@@ -41,11 +41,11 @@ local ButtonResetApp = {
         local options =
             {
                 id = 'btn-next-page',
-                overFile = "assets/btn_reset_default.png",
-                defaultFile = "assets/btn_reset_default.png",
+                overFile = "assets/btn_reset.png",
+                defaultFile = "assets/btn_reset.png",
 
-                x = Dimension.decrementWidth(Dimension.sliceWidth(7)), -- decrement proportion 1/7 from width
-                y = Dimension.decrementHeight(Dimension.sliceHeight(10)), -- decrement proportion 1/10 from height
+                x = Dimension.BTN_RESET_X,
+                y = Dimension.BTN_RESET_Y,
                 
                 onRelease = function()
 

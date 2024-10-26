@@ -41,11 +41,11 @@ local ButtonBackPage = {
         local options =
             {
                 id = 'btn-back-page',
-                overFile = "assets/btn_back_default.png",
-                defaultFile = "assets/btn_back_default.png",
+                overFile = "assets/btn_prev.png",
+                defaultFile = "assets/btn_prev.png",
 
-                x = Dimension.sliceWidth(7), -- proportion 1/7 from width
-                y = Dimension.decrementHeight(Dimension.sliceHeight(10)), -- decrement proportion 1/10 from height
+                x = Dimension.BTN_PREV_X,
+                y = Dimension.BTN_PREV_Y,
                 
                 onRelease = function()
 

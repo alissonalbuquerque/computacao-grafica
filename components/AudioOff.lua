@@ -32,11 +32,11 @@ local AudioOff = {
         local options =
             {
                 id = 'btn-audio-off',
-                overFile = "assets/audio_off.png",
-                defaultFile = "assets/audio_off.png",
+                overFile = "assets/btn_off_audio.png",
+                defaultFile = "assets/btn_off_audio.png",
 
-                x = Dimension.decrementWidth(Dimension.sliceWidth(7)), -- decrement width in proportion 1/7 from width
-                y = Dimension.sliceHeight(15), -- decrement proportion 1/15 from height
+                x = Dimension.BTN_AUDIO_X,
+                y = Dimension.BTN_AUDIO_Y,
             }
 
         local button_audio_on = Button.create(options)
