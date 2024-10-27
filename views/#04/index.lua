@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- page2.lua
+-- Page #04
 --
 -----------------------------------------------------------------------------------------
 
@@ -35,15 +35,18 @@ local scene = composer.newScene()
 function scene:create(event)
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/page04/page.png')
+    local page_image = display.newImage(sceneGroup, 'views/#04/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
     local btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     local btn_audio_on = AudioOn.create({ scene_group = sceneGroup })
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.page03.index_part_1'})
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.page05.index'})
+    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
+    local audio_player = nil
+
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#03.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#05.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 

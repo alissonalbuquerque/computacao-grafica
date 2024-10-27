@@ -1,20 +1,20 @@
 -----------------------------------------------------------------------------------------
 --
--- page1.lua
+-- Page #05
 --
 -----------------------------------------------------------------------------------------
 
 -- @local composer : Table
 local composer = require('composer')
 
--- @local audio : Table
-local audio = require('audio')
-
 -- @local Dimension : Table
 local Dimension = require('utils.display.Dimension')
 
 -- @local ButtonNextPage : Table
 local ButtonNextPage = require('components.ButtonNextPage')
+
+-- @local ButtonBackPage : Table
+local ButtonBackPage = require('components.ButtonBackPage')
 
 -- @local AudioOn : Table
 local AudioOn = require('components.AudioOn')
@@ -30,31 +30,30 @@ local scene = composer.newScene()
 
 -----------------------------------------------------------------------------------------
 
-local audio_player = nil
-
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
-
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/page01/page.png')
+    local page_image = display.newImage(sceneGroup, 'views/#05/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
     local btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     local btn_audio_on = AudioOn.create({ scene_group = sceneGroup })
 
-    audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'})
+    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
+    local audio_player = nil
 
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.page02.index', audio_player = audio_player })
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#04.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#06.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
         local _btn_audio_on = event.target
         local _btn_audio_off = btn_audio_off
 
-        local _audio_player = audio_player
+        -- local _audio_player = audio_player
 
         _btn_audio_on.isVisible = false;
         _btn_audio_on.isEnabled = false;
@@ -62,7 +61,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = true;
         _btn_audio_off.isEnabled = true;
 
-        _audio_player:volumeOff()
+        -- _audio_player:volumeOff()
     end)
 
     btn_audio_off:addEventListener("touch", function (event) 
@@ -70,7 +69,7 @@ function scene:create(event)
         local _btn_audio_on = btn_audio_on
         local _btn_audio_off = event.target
 
-        local _audio_player = audio_player
+        -- local _audio_player = audio_player
 
         _btn_audio_on.isVisible = true
         _btn_audio_on.isEnabled = true
@@ -78,7 +77,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = false
         _btn_audio_off.isEnabled = false
 
-        _audio_player:volumeOn()
+        -- _audio_player:volumeOn()
     end)
 
 end
@@ -90,11 +89,10 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        audio_player:stop()
+        -- Inicialize objetos e faça transições antes de mostrar a cena
     elseif (phase == "did") then
-        audio_player:play()
+        -- Lógica para quando a cena é mostrada
     end
-
 end
 
 -- @param event : Object<event>
@@ -104,9 +102,9 @@ function scene:hide(event)
     local phase = event.phase
 
     if (phase == "will") then
-
+        -- Faça preparativos antes de ocultar a cena
     elseif (phase == "did") then
-
+        -- Limpeza após a cena ser ocultada
     end
 end
 
@@ -114,6 +112,7 @@ end
 -- @return void
 function scene:destroy(event)
     local sceneGroup = self.view
+    -- Limpe recursos quando a cena for destruída
 end
 
 -- Adicione os ouvintes de cena

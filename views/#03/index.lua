@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- page2.lua
+-- Page #03
 --
 -----------------------------------------------------------------------------------------
 
@@ -25,41 +25,17 @@ local AudioOff = require('components.AudioOff')
 -- @local AudioPlayer : Table
 local AudioPlayer = require('utils.audio.AudioPlayer')
 
--- @local GotoScene : Table
-local GotoScene = require('utils.composer.GotoScene')
-
 -- @local scene : Object<scene>
 local scene = composer.newScene()
 
 -----------------------------------------------------------------------------------------
-
--- @EVENTS
---------------------------------------------------------------------
-local startX = 0
-local startY = 0
-
-local onTouch = function(event)
-
-    local _attribute_options = {
-        path_next_page = "views.page03.index_part_2",
-        effect = GotoScene.EFFECT_SLIDE_LEFT,
-    }
-
-    composer.gotoScene(_attribute_options['path_next_page'], {
-        effect  = _attribute_options['effect'],
-    });
-
-    return true
-end
---------------------------------------------------------------------
-
 
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/page03/page_part_1.png')
+    local page_image = display.newImage(sceneGroup, 'views/#03/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
@@ -69,8 +45,8 @@ function scene:create(event)
     -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
     local audio_player = nil
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.page02.index'})
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.page04.index'})
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#02.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#04.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
@@ -115,7 +91,7 @@ function scene:show(event)
     if (phase == "will") then
         -- Inicialize objetos e faça transições antes de mostrar a cena
     elseif (phase == "did") then
-        Runtime:addEventListener("touch", onTouch)
+        -- Lógica para quando a cena é mostrada
     end
 end
 
@@ -126,7 +102,7 @@ function scene:hide(event)
     local phase = event.phase
 
     if (phase == "will") then
-        Runtime:removeEventListener("touch", onTouch)
+        -- Faça preparativos antes de ocultar a cena
     elseif (phase == "did") then
         -- Limpeza após a cena ser ocultada
     end

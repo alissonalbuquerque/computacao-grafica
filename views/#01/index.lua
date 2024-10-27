@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- page1.lua
+-- Page #01
 --
 -----------------------------------------------------------------------------------------
 
@@ -47,7 +47,7 @@ function scene:create(event)
 
     audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'})
 
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.page02.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#02.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
