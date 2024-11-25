@@ -12,4 +12,4 @@ local composer = require('composer')
 
 local GotoScene = require('utils.composer.GotoScene')
 
-composer.gotoScene('views.#01.index', GotoScene.EFFECT_FADE)
+composer.gotoScene('views.#02.index', GotoScene.EFFECT_FADE)
