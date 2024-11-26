@@ -138,11 +138,10 @@ function scene:create(event)
 
     -- INTERATIONS IN VIEW --
     -----------------------------------------------------------------------------------------
-
-    myObject = display.newCircle(display.contentCenterX, display.contentCenterY, 30)
-    myObject:setFillColor(0.5, 0.7, 1)
-
     local scene_group = sceneGroup
+
+    myObject = display.newCircle(scene_group ,display.contentCenterX, display.contentCenterY, 30)
+    myObject:setFillColor(0.5, 0.7, 1)
 
         -- celula = display.newImage(scene_group, 'views/#03/interations/celula.png')
         -- celula.x = celula_x
