@@ -30,20 +30,29 @@ local scene = composer.newScene()
 
 -----------------------------------------------------------------------------------------
 
+local audio_player  = nil
+
+local btn_audio_on  = nil
+
+local btn_audio_off = nil
+
+-----------------------------------------------------------------------------------------
+
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
+
     local sceneGroup = self.view
 
     local page_image = display.newImage(sceneGroup, 'views/#03/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
-    local btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
-    local btn_audio_on = AudioOn.create({ scene_group = sceneGroup })
+    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
+    btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
     -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
-    local audio_player = nil
+    audio_player = nil
 
     local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#02.index', audio_player = audio_player })
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#04.index', audio_player = audio_player })

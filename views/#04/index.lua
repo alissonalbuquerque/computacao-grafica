@@ -30,23 +30,34 @@ local scene = composer.newScene()
 
 -----------------------------------------------------------------------------------------
 
+local audio_player  = nil
+
+local btn_audio_on  = nil
+
+local btn_audio_off = nil
+
+-----------------------------------------------------------------------------------------
+
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
+
     local sceneGroup = self.view
+
+    local params = event.params or {}
 
     local page_image = display.newImage(sceneGroup, 'views/#04/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
-    local btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
-    local btn_audio_on = AudioOn.create({ scene_group = sceneGroup })
+    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
+    btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
     -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
     local audio_player = nil
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#03.index', audio_player = audio_player })
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#05.index', audio_player = audio_player })
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#03.index', audio_player = audio_player, params = params })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#05.index', audio_player = audio_player, params = params })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
@@ -79,6 +90,18 @@ function scene:create(event)
 
         -- _audio_player:volumeOn()
     end)
+
+    if not params['audio_enable'] then
+
+        btn_audio_on:dispatchEvent({
+            name = 'touch',
+            phase = 'ended',
+            x = btn_audio_on.x,
+            y = btn_audio_on.y,
+            target = btn_audio_on
+        })
+
+    end
 
 end
 
