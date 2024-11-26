@@ -48,11 +48,11 @@ function scene:create(event)
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
-    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
+    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
 
-    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
-    audio_player = nil
+    audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'})
+    -- audio_player = AudioPlayer.new({path_audio_file = 'views/#03/audio/audio.mp3'})
 
     local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#02.index', audio_player = audio_player })
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#04.index', audio_player = audio_player })
@@ -99,8 +99,13 @@ function scene:show(event)
 
     if (phase == "will") then
         -- Inicialize objetos e faça transições antes de mostrar a cena
+        audio_player:volumeOff()
+        audio_player:stop()
+
     elseif (phase == "did") then
         -- Lógica para quando a cena é mostrada
+        audio_player:play()
+        
     end
 end
 

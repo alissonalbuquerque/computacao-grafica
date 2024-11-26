@@ -87,8 +87,8 @@ function scene:create(event)
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
-    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
+    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
 
     audio_player = AudioPlayer.new({path_audio_file = 'views/#02/audio/audio.mp3'})
 
@@ -161,8 +161,12 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        audio_player:stop()
+
         -- Inicialize objetos e faça transições antes de mostrar a cena
+        audio_player:volumeOff()
+
+        audio_player:stop()
+        
     elseif (phase == "did") then
         -- Lógica para quando a cena é mostrada
         audio_player:play()

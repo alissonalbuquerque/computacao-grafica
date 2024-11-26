@@ -36,6 +36,8 @@ local btn_audio_on  = nil
 
 local btn_audio_off = nil
 
+-----------------------------------------------------------------------------------------
+
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
@@ -46,8 +48,9 @@ function scene:create(event)
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
-    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
+    btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
+    
     
     audio_player = AudioPlayer.new({path_audio_file = 'views/#01/audio/audio.mp3'})
 
@@ -92,16 +95,20 @@ end
 function scene:show(event)
 
     local sceneGroup = self.view
-
     local phase = event.phase
+
+    local enable_audio = composer.getVariable('enable_audio')
 
     if (phase == "will") then
 
+        audio_player:volumeOff()
+        
         audio_player:stop()
 
     elseif (phase == "did") then
 
         audio_player:play()
+
     end
 
 end

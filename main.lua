@@ -12,6 +12,4 @@ local composer = require('composer')
 
 local GotoScene = require('utils.composer.GotoScene')
 
-composer.setVariable('enable_audio', false)
-
 composer.gotoScene('views.#01.index', GotoScene.EFFECT_FADE)
