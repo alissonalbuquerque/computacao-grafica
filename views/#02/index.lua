@@ -46,7 +46,6 @@ local lig_atom_right, lig_atom_right_x, lig_atom_right_y = nil, 250, 700
 
 local atom_oxygen, atom_oxygen_x, atom_oxygen_y = nil, 200, 650
 
-
 local function move_object(event)
 
     if event.phase == "began" then

@@ -53,7 +53,7 @@ function scene:create(event)
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
-    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
+    -- audio_player = AudioPlayer.new({path_audio_file = 'views/#04/audio/audio.mp3'})
 
     local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#03.index', audio_player = audio_player, params = params })
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#05.index', audio_player = audio_player, params = params })
@@ -100,8 +100,12 @@ function scene:show(event)
 
     if (phase == "will") then
         -- Inicialize objetos e faça transições antes de mostrar a cena
+        -- audio_player:volumeOff()
+        -- audio_player:stop()
+
     elseif (phase == "did") then
         -- Lógica para quando a cena é mostrada
+        -- audio_player:play()
     end
 end
 
