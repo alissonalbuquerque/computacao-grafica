@@ -162,6 +162,23 @@ function scene:show(event)
     if (phase == "will") then
 
         -- Inicialize objetos e faça transições antes de mostrar a cena
+
+        local atom_hidrogen_left_x , atom_hidrogen_left_y  = 250, 550
+        local atom_hidrogen_right_x, atom_hidrogen_right_y = 150, 550
+
+        local lig_atom_left_x , lig_atom_left_y  = 100, 600
+        local lig_atom_right_x, lig_atom_right_y = 250, 700
+
+        local atom_oxygen_x, atom_oxygen_y = 200, 650
+
+            atom_hidrogen_left.x, atom_hidrogen_left.y   = atom_hidrogen_left_x, atom_hidrogen_left_y
+            atom_hidrogen_right.x, atom_hidrogen_right.y = atom_hidrogen_right_x, atom_hidrogen_right_y
+
+            lig_atom_left.x, lig_atom_left.y   = lig_atom_left_x, lig_atom_left_y
+            lig_atom_right.x, lig_atom_right.y = lig_atom_right_x, lig_atom_right_y
+
+            atom_oxygen.x, atom_oxygen.y = atom_oxygen_x, atom_oxygen_y
+
         audio_player:volumeOff()
 
         audio_player:stop()
