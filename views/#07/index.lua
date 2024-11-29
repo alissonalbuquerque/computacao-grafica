@@ -51,8 +51,7 @@ function scene:create(event)
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
-    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'}):play()
-    local audio_player = nil
+    audio_player = AudioPlayer.new({path_audio_file = 'views/#07/audio/audio.mp3'})
 
     local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#06.index', audio_player = audio_player })
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#08.index', audio_player = audio_player })
@@ -62,7 +61,7 @@ function scene:create(event)
         local _btn_audio_on = event.target
         local _btn_audio_off = btn_audio_off
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = false;
         _btn_audio_on.isEnabled = false;
@@ -70,7 +69,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = true;
         _btn_audio_off.isEnabled = true;
 
-        -- _audio_player:volumeOff()
+        _audio_player:volumeOff()
     end)
 
     btn_audio_off:addEventListener("touch", function (event) 
@@ -78,7 +77,7 @@ function scene:create(event)
         local _btn_audio_on = btn_audio_on
         local _btn_audio_off = event.target
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = true
         _btn_audio_on.isEnabled = true
@@ -86,7 +85,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = false
         _btn_audio_off.isEnabled = false
 
-        -- _audio_player:volumeOn()
+        _audio_player:volumeOn()
     end)
 
 end
@@ -98,10 +97,17 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        -- Inicialize objetos e faça transições antes de mostrar a cena
+
+        audio_player:volumeOff()
+        
+        audio_player:stop()
+
     elseif (phase == "did") then
-        -- Lógica para quando a cena é mostrada
+
+        audio_player:play()
+
     end
+    
 end
 
 -- @param event : Object<event>

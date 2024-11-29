@@ -51,7 +51,6 @@ function scene:create(event)
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     
-    
     audio_player = AudioPlayer.new({path_audio_file = 'views/#01/audio/audio.mp3'})
 
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#02.index', audio_player = audio_player })
