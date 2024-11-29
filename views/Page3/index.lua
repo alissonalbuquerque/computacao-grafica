@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #03
+-- Page Page3
 --
 -----------------------------------------------------------------------------------------
 
@@ -48,14 +48,14 @@ local celula_scale = 2.0
 local apendice_scale = 2.5
 local apendice_membrana_plamatica_scale = 1.0
 
-local nucleo_filename    = 'views/#03/interations/nucleo.png'
-local centriolo_filename = 'views/#03/interations/centriolo.png'
-local lisossomo_filename = 'views/#03/interations/lisossomo.png'
-local ribossomo_one_filename      = 'views/#03/interations/ribossomo_one.png'
-local membrana_plamatica_filename = 'views/#03/interations/membrana_plamatica.png'
-local mitocondria_one_filename    = 'views/#03/interations/mitocondria_one.png'
-local reticulo_endoplasmatico_one_filename    = 'views/#03/interations/reticulo_endoplasmatico_one.png'
-local reticulo_endoplasmatico_rugoso_filename = 'views/#03/interations/reticulo_endoplasmatico_rugoso.png'
+local nucleo_filename    = 'views/Page3/interations/nucleo.png'
+local centriolo_filename = 'views/Page3/interations/centriolo.png'
+local lisossomo_filename = 'views/Page3/interations/lisossomo.png'
+local ribossomo_one_filename      = 'views/Page3/interations/ribossomo_one.png'
+local membrana_plamatica_filename = 'views/Page3/interations/membrana_plamatica.png'
+local mitocondria_one_filename    = 'views/Page3/interations/mitocondria_one.png'
+local reticulo_endoplasmatico_one_filename    = 'views/Page3/interations/reticulo_endoplasmatico_one.png'
+local reticulo_endoplasmatico_rugoso_filename = 'views/Page3/interations/reticulo_endoplasmatico_rugoso.png'
 
 local nucleo, nucleo_x, nucleo_y = nil, 100, 500
 
@@ -76,7 +76,7 @@ local membrana_plamatica, membrana_plamatica_x, membrana_plamatica_y = nil, 600,
 -----------------------------------------------------------------------------------------
 
 local create_celula = function(scene_group, x, y, scale)
-    local image = display.newImage(scene_group, 'views/#03/interations/celula.png')
+    local image = display.newImage(scene_group, 'views/Page3/interations/celula.png')
         image.x = x
         image.y = y
         image:scale(scale, scale)
@@ -120,7 +120,7 @@ local tap_object = function (event)
 
     celula_scale = celula_scale + 0.1
 
-    local audio_player = AudioPlayer.new({path_audio_file = 'views/#03/audio/pop.mp3'})
+    local audio_player = AudioPlayer.new({path_audio_file = 'views/Page3/audio/pop.mp3'})
 
     if(celula_scale > 2.5) then
 
@@ -144,17 +144,17 @@ function scene:create(event)
 
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/#03/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page3/index.png')
           page_image.x = Dimension.centerX
           page_image.y = Dimension.centerY
 
         btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
         btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
 
-        audio_player = AudioPlayer.new({path_audio_file = 'views/#03/audio/audio.mp3'})
+        audio_player = AudioPlayer.new({path_audio_file = 'views/Page3/audio/audio.mp3'})
 
-        btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#02.index', audio_player = audio_player })
-        btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#04.index', audio_player = audio_player })
+        btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page2.index', audio_player = audio_player })
+        btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page4.index', audio_player = audio_player })
 
         btn_audio_on:addEventListener("touch", function (event) 
 

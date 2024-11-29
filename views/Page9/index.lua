@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #07
+-- Page Page9
 --
 -----------------------------------------------------------------------------------------
 
@@ -10,11 +10,11 @@ local composer = require('composer')
 -- @local Dimension : Table
 local Dimension = require('utils.display.Dimension')
 
--- @local ButtonNextPage : Table
-local ButtonNextPage = require('components.ButtonNextPage')
-
 -- @local ButtonBackPage : Table
 local ButtonBackPage = require('components.ButtonBackPage')
+
+-- @local ButtonNextPage : Table
+local ButtonResetApp = require('components.ButtonResetApp')
 
 -- @local AudioOn : Table
 local AudioOn = require('components.AudioOn')
@@ -41,20 +41,20 @@ local btn_audio_off = nil
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
-
+    
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/#07/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page9/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
+    btn_audio_on = AudioOn.create({ scene_group = sceneGroup })
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
-    btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
-    audio_player = AudioPlayer.new({path_audio_file = 'views/#07/audio/audio.mp3'})
+    audio_player = AudioPlayer.new({path_audio_file = 'views/Page9/audio/audio.mp3'})
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#06.index', audio_player = audio_player })
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#08.index', audio_player = audio_player })
+    local btn_back  = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page8.index', audio_player = audio_player })
+    local btn_reset = ButtonResetApp.create({ scene_group = sceneGroup, path_next_page = 'views.Page1.index'})
 
     btn_audio_on:addEventListener("touch", function (event) 
 
@@ -97,17 +97,14 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-
+        -- Inicialize objetos e faça transições antes de mostrar a cena
         audio_player:volumeOff()
-        
         audio_player:stop()
 
     elseif (phase == "did") then
-
+        -- Lógica para quando a cena é mostrada
         audio_player:play()
-
     end
-    
 end
 
 -- @param event : Object<event>

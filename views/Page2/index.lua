@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #02
+-- Page Page2
 --
 -----------------------------------------------------------------------------------------
 
@@ -82,17 +82,17 @@ function scene:create(event)
 
     local sceneGroup = self.view
 
-    local page_image = display.newImage(sceneGroup, 'views/#02/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page2/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
 
-    audio_player = AudioPlayer.new({path_audio_file = 'views/#02/audio/audio.mp3'})
+    audio_player = AudioPlayer.new({path_audio_file = 'views/Page2/audio/audio.mp3'})
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#01.index', audio_player = audio_player })
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#03.index', audio_player = audio_player })
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page1.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page3.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
@@ -130,23 +130,23 @@ function scene:create(event)
 
     local scene_group = sceneGroup
 
-        atom_hidrogen_right = display.newImage(scene_group, 'views/#02/interations/atom_hidrogen_right.png')
+        atom_hidrogen_right = display.newImage(scene_group, 'views/Page2/interations/atom_hidrogen_right.png')
         atom_hidrogen_right.x = atom_hidrogen_right_x
         atom_hidrogen_right.y = atom_hidrogen_right_y
 
-        atom_hidrogen_left = display.newImage(scene_group, 'views/#02/interations/atom_hidrogen_left.png')
+        atom_hidrogen_left = display.newImage(scene_group, 'views/Page2/interations/atom_hidrogen_left.png')
         atom_hidrogen_left.x = atom_hidrogen_left_x
         atom_hidrogen_left.y = atom_hidrogen_left_y
 
-        atom_oxygen = display.newImage(scene_group, 'views/#02/interations/atom_oxygen.png')
+        atom_oxygen = display.newImage(scene_group, 'views/Page2/interations/atom_oxygen.png')
         atom_oxygen.x = atom_oxygen_x
         atom_oxygen.y = atom_oxygen_y
 
-        lig_atom_left = display.newImage(scene_group, 'views/#02/interations/lig_atom.png')
+        lig_atom_left = display.newImage(scene_group, 'views/Page2/interations/lig_atom.png')
         lig_atom_left.x = lig_atom_left_x
         lig_atom_left.y = lig_atom_left_y
 
-        lig_atom_right = display.newImage(scene_group, 'views/#02/interations/lig_atom.png')
+        lig_atom_right = display.newImage(scene_group, 'views/Page2/interations/lig_atom.png')
         lig_atom_right.x = lig_atom_right_x
         lig_atom_right.y = lig_atom_right_y
 end

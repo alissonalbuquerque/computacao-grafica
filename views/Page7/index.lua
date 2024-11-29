@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #05
+-- Page Page7
 --
 -----------------------------------------------------------------------------------------
 
@@ -44,26 +44,24 @@ function scene:create(event)
 
     local sceneGroup = self.view
 
-    local params = event.params or {}
-
-    local page_image = display.newImage(sceneGroup, 'views/#05/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page7/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
-    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'})
+    audio_player = AudioPlayer.new({path_audio_file = 'views/Page7/audio/audio.mp3'})
 
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#04.index', audio_player = audio_player })
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#06.index', audio_player = audio_player })
+    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page6.index', audio_player = audio_player })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page8.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
         local _btn_audio_on = event.target
         local _btn_audio_off = btn_audio_off
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = false;
         _btn_audio_on.isEnabled = false;
@@ -71,7 +69,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = true;
         _btn_audio_off.isEnabled = true;
 
-        -- _audio_player:volumeOff()
+        _audio_player:volumeOff()
     end)
 
     btn_audio_off:addEventListener("touch", function (event) 
@@ -79,7 +77,7 @@ function scene:create(event)
         local _btn_audio_on = btn_audio_on
         local _btn_audio_off = event.target
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = true
         _btn_audio_on.isEnabled = true
@@ -87,9 +85,9 @@ function scene:create(event)
         _btn_audio_off.isVisible = false
         _btn_audio_off.isEnabled = false
 
-        -- _audio_player:volumeOn()
+        _audio_player:volumeOn()
     end)
-        
+
 end
 
 -- @param event : Object<event>
@@ -99,10 +97,17 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        -- Inicialize objetos e faça transições antes de mostrar a cena
+
+        audio_player:volumeOff()
+        
+        audio_player:stop()
+
     elseif (phase == "did") then
-        -- Lógica para quando a cena é mostrada
+
+        audio_player:play()
+
     end
+    
 end
 
 -- @param event : Object<event>

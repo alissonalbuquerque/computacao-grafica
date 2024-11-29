@@ -1,20 +1,20 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #08
+-- Page Page1
 --
 -----------------------------------------------------------------------------------------
 
 -- @local composer : Table
 local composer = require('composer')
 
+-- @local audio : Table
+local audio = require('audio')
+
 -- @local Dimension : Table
 local Dimension = require('utils.display.Dimension')
 
 -- @local ButtonNextPage : Table
 local ButtonNextPage = require('components.ButtonNextPage')
-
--- @local ButtonBackPage : Table
-local ButtonBackPage = require('components.ButtonBackPage')
 
 -- @local AudioOn : Table
 local AudioOn = require('components.AudioOn')
@@ -44,19 +44,16 @@ function scene:create(event)
 
     local sceneGroup = self.view
 
-    local params = event.params or {}
-
-    local page_image = display.newImage(sceneGroup, 'views/#08/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page1/index.png')
     page_image.x = Dimension.centerX
     page_image.y = Dimension.centerY
 
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
+    
+    audio_player = AudioPlayer.new({path_audio_file = 'views/Page1/audio/audio.mp3'})
 
-    audio_player = AudioPlayer.new({path_audio_file = 'views/#08/audio/audio.mp3'})
-
-    local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#07.index', audio_player = audio_player, params = params })
-    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#09.index', audio_player = audio_player, params = params })
+    local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page2.index', audio_player = audio_player })
 
     btn_audio_on:addEventListener("touch", function (event) 
 
@@ -89,7 +86,7 @@ function scene:create(event)
 
         _audio_player:volumeOn()
     end)
-    
+
 end
 
 -- @param event : Object<event>
@@ -97,7 +94,9 @@ end
 function scene:show(event)
 
     local sceneGroup = self.view
-    local phase      = event.phase
+    local phase = event.phase
+
+    local enable_audio = composer.getVariable('enable_audio')
 
     if (phase == "will") then
 
@@ -110,18 +109,21 @@ function scene:show(event)
         audio_player:play()
 
     end
+
 end
 
 -- @param event : Object<event>
 -- @return void
 function scene:hide(event)
+
     local sceneGroup = self.view
+
     local phase = event.phase
 
     if (phase == "will") then
-        -- Faça preparativos antes de ocultar a cena
+
     elseif (phase == "did") then
-        -- Limpeza após a cena ser ocultada
+
     end
 end
 
@@ -129,7 +131,6 @@ end
 -- @return void
 function scene:destroy(event)
     local sceneGroup = self.view
-    -- Limpe recursos quando a cena for destruída
 end
 
 -- Adicione os ouvintes de cena

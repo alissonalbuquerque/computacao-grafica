@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- Page #04
+-- Page Page4
 --
 -----------------------------------------------------------------------------------------
 
@@ -42,8 +42,8 @@ local btn_next      = nil
 
 -----------------------------------------------------------------------------------------
 
-local image_initial_path = 'views/#04/interations/image_initial.png'
-local image_final_path   = 'views/#04/interations/image_final.png'
+local image_initial_path = 'views/Page4/interations/image_initial.png'
+local image_final_path   = 'views/Page4/interations/image_final.png'
 
 local image_initial_scale = 1.0
 local image_initial, image_initial_x, image_initial_y = nil, Dimension.centerX, 700
@@ -70,17 +70,17 @@ function scene:create(event)
 
     local params = event.params or {}
 
-    local page_image = display.newImage(sceneGroup, 'views/#04/index.png')
+    local page_image = display.newImage(sceneGroup, 'views/Page4/index.png')
           page_image.x = Dimension.centerX
           page_image.y = Dimension.centerY
 
         btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
         btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
 
-        audio_player = AudioPlayer.new({path_audio_file = 'views/#04/audio/audio.mp3'})
+        audio_player = AudioPlayer.new({path_audio_file = 'views/Page4/audio/audio.mp3'})
 
-        btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.#03.index', audio_player = audio_player, params = params })
-        btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.#05.index', audio_player = audio_player, params = params })
+        btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page3.index', audio_player = audio_player, params = params })
+        btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page5.index', audio_player = audio_player, params = params })
 
         btn_audio_on:addEventListener("touch", function (event) 
 
