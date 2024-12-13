@@ -100,6 +100,12 @@ function scene:show(event)
 
     if (phase == "will") then
 
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
+
         audio_player:volumeOff()
         
         audio_player:stop()
@@ -121,6 +127,8 @@ function scene:hide(event)
     local phase = event.phase
 
     if (phase == "will") then
+
+        print('teste')
 
     elseif (phase == "did") then
 
