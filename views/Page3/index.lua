@@ -225,6 +225,12 @@ function scene:show(event)
 
         celula_scale_x, celula_scale_y = 2.0, 2.0
 
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
+
         audio_player:volumeOff()
 
         audio_player:stop()

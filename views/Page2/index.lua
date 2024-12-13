@@ -40,11 +40,11 @@ local atom_hidrogen_left , atom_hidrogen_left_x , atom_hidrogen_left_y  = nil, 2
 
 local atom_hidrogen_right, atom_hidrogen_right_x, atom_hidrogen_right_y = nil, 150, 550
 
-local lig_atom_left , lig_atom_left_x , lig_atom_left_y  = nil, 100, 600
-
-local lig_atom_right, lig_atom_right_x, lig_atom_right_y = nil, 250, 700
-
 local atom_oxygen, atom_oxygen_x, atom_oxygen_y = nil, 200, 650
+
+local atom_oxygen_a, atom_oxygen_a_x, atom_oxygen_a_y = nil, 200, 650
+
+local atom_oxygen_b, atom_oxygen_b_x, atom_oxygen_b_y = nil, 200, 650
 
 local function move_object(event)
 
@@ -142,13 +142,13 @@ function scene:create(event)
         atom_oxygen.x = atom_oxygen_x
         atom_oxygen.y = atom_oxygen_y
 
-        lig_atom_left = display.newImage(scene_group, 'views/Page2/interations/lig_atom.png')
-        lig_atom_left.x = lig_atom_left_x
-        lig_atom_left.y = lig_atom_left_y
+        atom_oxygen_a = display.newImage(scene_group, 'views/Page2/interations/atom_oxygen.png')
+        atom_oxygen_a.x = atom_oxygen_x
+        atom_oxygen_a.y = atom_oxygen_y
 
-        lig_atom_right = display.newImage(scene_group, 'views/Page2/interations/lig_atom.png')
-        lig_atom_right.x = lig_atom_right_x
-        lig_atom_right.y = lig_atom_right_y
+        atom_oxygen_b = display.newImage(scene_group, 'views/Page2/interations/atom_oxygen.png')
+        atom_oxygen_b.x = atom_oxygen_x
+        atom_oxygen_b.y = atom_oxygen_y
 end
 
 -- @param event : Object<event>
@@ -166,18 +166,20 @@ function scene:show(event)
         local atom_hidrogen_left_x , atom_hidrogen_left_y  = 250, 550
         local atom_hidrogen_right_x, atom_hidrogen_right_y = 150, 550
 
-        local lig_atom_left_x , lig_atom_left_y  = 100, 600
-        local lig_atom_right_x, lig_atom_right_y = 250, 700
-
-        local atom_oxygen_x, atom_oxygen_y = 200, 650
+        local atom_oxygen_x, atom_oxygen_y     = 200, 650
 
             atom_hidrogen_left.x, atom_hidrogen_left.y   = atom_hidrogen_left_x, atom_hidrogen_left_y
             atom_hidrogen_right.x, atom_hidrogen_right.y = atom_hidrogen_right_x, atom_hidrogen_right_y
 
-            lig_atom_left.x, lig_atom_left.y   = lig_atom_left_x, lig_atom_left_y
-            lig_atom_right.x, lig_atom_right.y = lig_atom_right_x, lig_atom_right_y
+            atom_oxygen.x, atom_oxygen.y     = atom_oxygen_x, atom_oxygen_y
+            atom_oxygen_a.x, atom_oxygen_a.y = atom_oxygen_x, atom_oxygen_y
+            atom_oxygen_b.x, atom_oxygen_b.y = atom_oxygen_x, atom_oxygen_y
 
-            atom_oxygen.x, atom_oxygen.y = atom_oxygen_x, atom_oxygen_y
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
 
         audio_player:volumeOff()
 
@@ -189,9 +191,9 @@ function scene:show(event)
 
         atom_hidrogen_right:addEventListener('touch', move_object)
         atom_hidrogen_left:addEventListener('touch', move_object)
-        lig_atom_left:addEventListener('touch', move_object)
-        lig_atom_right:addEventListener('touch', move_object)
         atom_oxygen:addEventListener('touch', move_object)
+        atom_oxygen_a:addEventListener('touch', move_object)
+        atom_oxygen_b:addEventListener('touch', move_object)
     end
 end
 
@@ -209,9 +211,9 @@ function scene:hide(event)
         -- Limpeza após a cena ser ocultada
         atom_hidrogen_right:removeEventListener('touch', move_object)
         atom_hidrogen_left:removeEventListener('touch', move_object)
-        lig_atom_left:removeEventListener('touch', move_object)
-        lig_atom_right:removeEventListener('touch', move_object)
         atom_oxygen:removeEventListener('touch', move_object)
+        atom_oxygen_a:removeEventListener('touch', move_object)
+        atom_oxygen_b:removeEventListener('touch', move_object)
     end
 end
 
