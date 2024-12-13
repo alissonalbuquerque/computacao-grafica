@@ -128,8 +128,6 @@ function scene:hide(event)
 
     if (phase == "will") then
 
-        print('teste')
-
     elseif (phase == "did") then
 
     end
