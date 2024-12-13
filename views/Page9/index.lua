@@ -97,7 +97,13 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        -- Inicialize objetos e faça transições antes de mostrar a cena
+        
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
+
         audio_player:volumeOff()
         audio_player:stop()
 
