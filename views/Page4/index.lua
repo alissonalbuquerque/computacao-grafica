@@ -44,9 +44,19 @@ local btn_next      = nil
 
 local image_initial_path = 'views/Page4/interations/image_initial.png'
 local image_final_path   = 'views/Page4/interations/image_final.png'
+local image_zoom_in      = 'views/Page4/interations/lupa_max.png'
+local image_zoom_out     = 'views/Page4/interations/lupa_min.png'
 
+local image_scale = 1.0
 local image_initial_scale = 1.0
+
 local image_initial, image_initial_x, image_initial_y = nil, Dimension.centerX, 700
+
+local image_final, image_final_x, image_final_y = nil, Dimension.centerX, 700
+
+local btn_zoom_in, btn_zoom_in_x, btn_zoom_in_y = nil, 650, 600
+
+local btn_zoom_out, btn_zoom_out_x, btn_zoom_out_y = nil, 650, 800
 
 local create_image = function(scene_group, x, y, scale, filename)
     local image = display.newImage(scene_group, filename)
@@ -58,7 +68,40 @@ local create_image = function(scene_group, x, y, scale, filename)
 end
 
 local zoom_in = function(event)
+
     
+
+    image_initial_scale = image_initial_scale + 0.1
+
+    if image_initial_scale >= 1.5 then
+        image_initial_scale = 1.5
+    end
+
+    if(image_initial_scale >= 1.4) then
+        image_initial.isVisible = false
+        image_final.isVisible = true
+    else
+        image_initial.xScale = image_initial_scale
+        image_initial.yScale = image_initial_scale
+    end
+
+end
+
+local zoom_out = function(event)
+
+    image_initial_scale = image_initial_scale - 0.1
+
+    if image_initial_scale <= 1.0 then
+        image_initial_scale = 1.0
+    end
+
+    if image_initial_scale < 1.4 then
+        image_final.isVisible = false
+        image_initial.isVisible = true
+
+        image_initial.xScale = image_initial_scale
+        image_initial.yScale = image_initial_scale
+    end
 end
 -----------------------------------------------------------------------------------------
 
@@ -120,6 +163,12 @@ function scene:create(event)
     local scene_group = sceneGroup
 
     image_initial = create_image(scene_group, image_initial_x, image_initial_y, image_initial_scale, image_initial_path)
+
+    image_final  = create_image(scene_group, image_final_x, image_final_y, image_scale, image_final_path)
+
+    btn_zoom_in  = create_image(scene_group, btn_zoom_in_x, btn_zoom_in_y, image_scale, image_zoom_in)
+
+    btn_zoom_out = create_image(scene_group, btn_zoom_out_x, btn_zoom_out_y, image_scale, image_zoom_out)
     
     -----------------------------------------------------------------------------------------
 end
@@ -132,11 +181,22 @@ function scene:show(event)
 
     if (phase == "will") then
         
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
+
+        image_final.isVisible = false
+
         audio_player:volumeOff()
         audio_player:stop()
 
     elseif (phase == "did") then
-        
+
+        btn_zoom_in:addEventListener('tap', zoom_in)
+        btn_zoom_out:addEventListener('tap', zoom_out)
+
         audio_player:play()
     end
 end
@@ -144,13 +204,23 @@ end
 -- @param event : Object<event>
 -- @return void
 function scene:hide(event)
-    local sceneGroup = self.view
+    local scene_group = self.view
     local phase = event.phase
 
     if (phase == "will") then
-        
+
     elseif (phase == "did") then
+
+        image_initial:removeSelf()
+        image_initial = nil
         
+        image_initial_scale = 1.0
+
+        image_initial = create_image(scene_group, image_initial_x, image_initial_y, image_initial_scale, image_initial_path)
+        
+        btn_zoom_in:removeEventListener('tap', zoom_in)
+        btn_zoom_out:removeEventListener('tap', zoom_out)
+
     end
 end
 
