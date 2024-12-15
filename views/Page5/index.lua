@@ -38,6 +38,35 @@ local btn_audio_off = nil
 
 -----------------------------------------------------------------------------------------
 
+local scale_default = 0.3
+local filename = 'views/Page5/interations/heart.png'
+local heart, heart_x, heart_y = nil, Dimension.centerX, 650
+
+local create_image = function(scene_group, x, y, scale, filename)
+    local image = display.newImage(scene_group, filename)
+        image.x = x
+        image.y = y
+        image:scale(scale, scale)
+        image.isVisible = true
+    return image
+end
+
+local tap_object = function (event)
+    
+    local target = event.target
+
+    if scale_default == 0.4 then
+        scale_default = scale_default - 0.1
+        target.xScale, target.yScale = scale_default, scale_default
+    else
+        scale_default = scale_default + 0.1
+        target.xScale, target.yScale = scale_default, scale_default
+    end
+
+end
+
+-----------------------------------------------------------------------------------------
+
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
@@ -53,7 +82,7 @@ function scene:create(event)
     btn_audio_off = AudioOff.create({ scene_group = sceneGroup })
     btn_audio_on  = AudioOn.create({ scene_group = sceneGroup })
 
-    -- local audio_player = AudioPlayer.new({path_audio_file = 'resources/audio/page01/audio.mp3'})
+    audio_player = AudioPlayer.new({path_audio_file = 'views/Page5/audio/audio.mp3'})
 
     local btn_back = ButtonBackPage.create({ scene_group = sceneGroup, path_back_page = 'views.Page4.index', audio_player = audio_player })
     local btn_next = ButtonNextPage.create({ scene_group = sceneGroup, path_next_page = 'views.Page6.index', audio_player = audio_player })
@@ -63,7 +92,7 @@ function scene:create(event)
         local _btn_audio_on = event.target
         local _btn_audio_off = btn_audio_off
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = false;
         _btn_audio_on.isEnabled = false;
@@ -71,7 +100,7 @@ function scene:create(event)
         _btn_audio_off.isVisible = true;
         _btn_audio_off.isEnabled = true;
 
-        -- _audio_player:volumeOff()
+        _audio_player:volumeOff()
     end)
 
     btn_audio_off:addEventListener("touch", function (event) 
@@ -79,7 +108,7 @@ function scene:create(event)
         local _btn_audio_on = btn_audio_on
         local _btn_audio_off = event.target
 
-        -- local _audio_player = audio_player
+        local _audio_player = audio_player
 
         _btn_audio_on.isVisible = true
         _btn_audio_on.isEnabled = true
@@ -87,8 +116,14 @@ function scene:create(event)
         _btn_audio_off.isVisible = false
         _btn_audio_off.isEnabled = false
 
-        -- _audio_player:volumeOn()
+        _audio_player:volumeOn()
     end)
+
+    -- INTERATIONS IN VIEW --
+    -----------------------------------------------------------------------------------------
+
+    local scene_group = sceneGroup
+    heart = create_image(scene_group, heart_x, heart_y, scale_default, filename)
         
 end
 
@@ -99,9 +134,21 @@ function scene:show(event)
     local phase = event.phase
 
     if (phase == "will") then
-        -- Inicialize objetos e faça transições antes de mostrar a cena
+        
+        btn_audio_on.isVisible = false
+        btn_audio_on.isEnabled = false
+
+        btn_audio_off.isVisible = true
+        btn_audio_off.isEnabled = true
+
+        audio_player:volumeOff()
+        audio_player:stop()
+
     elseif (phase == "did") then
-        -- Lógica para quando a cena é mostrada
+
+        heart:addEventListener('tap', tap_object)
+
+        audio_player:play()
     end
 end
 
@@ -112,9 +159,11 @@ function scene:hide(event)
     local phase = event.phase
 
     if (phase == "will") then
-        -- Faça preparativos antes de ocultar a cena
+        
     elseif (phase == "did") then
-        -- Limpeza após a cena ser ocultada
+        
+        heart:removeEventListener('tap', tap_object)
+
     end
 end
 
@@ -122,7 +171,6 @@ end
 -- @return void
 function scene:destroy(event)
     local sceneGroup = self.view
-    -- Limpe recursos quando a cena for destruída
 end
 
 -- Adicione os ouvintes de cena
