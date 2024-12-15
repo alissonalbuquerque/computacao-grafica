@@ -38,6 +38,76 @@ local btn_audio_off = nil
 
 -----------------------------------------------------------------------------------------
 
+local scale_respiratory = 1.5
+local filename = 'views/Page6/interations/respiratory_system.png'
+local respiratory, respiratory_x, respiratory_y = nil, Dimension.centerX, 650
+
+local scale = 0.3
+
+local change_flush = false
+
+local filename_circle_red = 'views/Page6/interations/circle_blue.png'
+local filename_circle_blue = 'views/Page6/interations/circle_blue.png'
+
+local circle, circle_x, circle_y = nil, 280, 600
+
+local create_image = function(scene_group, x, y, scale, filename)
+    local image = display.newImage(scene_group, filename)
+        image.x = x
+        image.y = y
+        image:scale(scale, scale)
+        image.isVisible = true
+    return image
+end
+
+local tap_object = function (event)
+    
+    local target = event.target
+
+    if change_flush == false then
+
+        if circle.x <= 380 then
+
+            for x = 1, 200 do
+                circle.x = circle.x + 0.1
+            end
+            
+        elseif circle.y <= 700 then
+    
+            for y = 1, 200 do
+                circle.y = circle.y + 0.1
+            end
+    
+        else
+            change_flush = true
+        end
+
+    end
+
+    if change_flush == true then
+
+        if circle.y > 600 then
+
+            for y = 1, 200 do
+                circle.y = circle.y - 0.1
+            end
+            
+        elseif circle.x > 280 then
+    
+            for y = 1, 200 do
+                circle.x = circle.x - 0.1
+            end
+    
+        else
+            change_flush = false
+        end
+
+    end
+
+end
+
+-----------------------------------------------------------------------------------------
+
 -- @param event : Object<event>
 -- @return void
 function scene:create(event)
@@ -92,6 +162,12 @@ function scene:create(event)
 
     -- INTERATIONS IN VIEW --
     -----------------------------------------------------------------------------------------
+
+    local scene_group = sceneGroup
+
+    respiratory = create_image(scene_group, respiratory_x, respiratory_y, scale_respiratory, filename)
+
+    circle = create_image(scene_group, circle_x, circle_y, scale, filename_circle_blue)
     
 end
 
@@ -114,6 +190,8 @@ function scene:show(event)
 
     elseif (phase == "did") then
 
+        respiratory:addEventListener('tap', tap_object)
+
         audio_player:play()
     end
 end
@@ -128,6 +206,7 @@ function scene:hide(event)
         
     elseif (phase == "did") then
 
+        respiratory:addEventListener('tap', tap_object)
     end
 end
 
